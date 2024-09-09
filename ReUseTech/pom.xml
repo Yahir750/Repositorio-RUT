@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.2</version>
+		<version>3.3.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>reusetech</groupId>
-	<artifactId>reusetech</artifactId>
+	<groupId>com.reusetech</groupId>
+	<artifactId>ReUseTech</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>reusetech</name>
-	<description>microservicios</description>
+	<name>eCommerce tech </name>
+	<description>eCommerce reciclables </description>
 	<url/>
 	<licenses>
 		<license/>
@@ -32,9 +32,19 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
