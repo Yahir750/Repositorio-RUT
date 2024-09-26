@@ -23,6 +23,7 @@
 	</properties>
 
 	<dependencies>
+
 		<!-- Thymeleaf para vistas -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -69,6 +70,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+
 
 	</dependencies>
 
