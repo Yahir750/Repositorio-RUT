@@ -22,6 +22,12 @@
 		<java.version>17</java.version>
 	</properties>
 
+	<modules>
+		<module>src/main/java/zGateway</module>
+		<module>src/main/java/Services/MicroServicio1</module>
+		<module>src/main/java/Services/Microservicio2</module>
+	</modules>
+
 	<dependencies>
 
 		<!-- Thymeleaf para vistas -->
