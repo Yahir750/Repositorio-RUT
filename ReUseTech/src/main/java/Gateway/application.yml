@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: api-gateway
@@ -6,20 +9,14 @@ spring:
     gateway:
       routes:
         - id: microservicio1
-          uri: http://localhost:8081
+          uri: lb://microservicio1
           predicates:
             - Path=/microservicio1/**
-          filters:
-            - RewritePath=/microservicio1/(?<segment>.*), /${segment}
-
         - id: microservicio2
-          uri: http://localhost:8082
+          uri: lb://microservicio2
           predicates:
             - Path=/microservicio2/**
-          filters:
-            - RewritePath=/microservicio2/(?<segment>.*), /${segment}
 
-# Opcional: Configuración de Eureka
 eureka:
   client:
     service-url:
