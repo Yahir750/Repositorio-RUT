@@ -1,0 +1,73 @@
+package model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "paquetes")
+public class Paquete {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idPaquete;
+
+    private String estadoActual;
+
+    private String localizacion;
+
+    private LocalDateTime fechaActualizacion;
+
+    private LocalDateTime fechaEstimadaDeEntrega;
+
+    private Long usuarioId;  // Relacionado con el usuario que realiza el seguimiento
+
+    // Getters y Setters
+
+    public Long getIdPaquete() {
+        return idPaquete;
+    }
+
+    public void setIdPaquete(Long idPaquete) {
+        this.idPaquete = idPaquete;
+    }
+
+    public String getEstadoActual() {
+        return estadoActual;
+    }
+
+    public void setEstadoActual(String estadoActual) {
+        this.estadoActual = estadoActual;
+    }
+
+    public String getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(String localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public LocalDateTime getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(LocalDateTime fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public LocalDateTime getFechaEstimadaDeEntrega() {
+        return fechaEstimadaDeEntrega;
+    }
+
+    public void setFechaEstimadaDeEntrega(LocalDateTime fechaEstimadaDeEntrega) {
+        this.fechaEstimadaDeEntrega = fechaEstimadaDeEntrega;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+}
