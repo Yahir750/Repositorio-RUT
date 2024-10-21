@@ -1,35 +1,29 @@
+
 package com.ReUseTech.com.ReUseTech.model;
 
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import lombok.Data;
+
 import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name="orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-    private String address;
-    private String phoneNumber;
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
-    public enum OrderStatus {
-        PREPARING, DELIVERING, DELIVERED, CANCELED
+
+    private Long userId;
+    private String status; // Por ejemplo: "PENDIENTE", "COMPLETADA", "CANCELADA"
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderItem> items;
+
+    public Object getUser() {
+        return null;
     }
-    private LocalDateTime createdAt;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItem> items = new ArrayList<>();
+
+    // Otros campos que consideres necesarios
 }

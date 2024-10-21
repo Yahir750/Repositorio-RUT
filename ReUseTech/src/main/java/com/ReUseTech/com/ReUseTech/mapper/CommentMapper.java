@@ -1,16 +1,17 @@
+
 package com.ReUseTech.com.ReUseTech.mapper;
 
 
 import com.ReUseTech.com.ReUseTech.dto.CommentDTO;
 import com.ReUseTech.com.ReUseTech.model.Comment;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring")
+
+@Mapper
 public interface CommentMapper {
-    @Mapping(target = "userId",source = "user.id")
-    CommentDTO toDTO(Comment comment);
-    @Mapping(target = "user.id", source = "userId")
-    @Mapping(target = "product", ignore = true)
-    Comment toEntity(CommentDTO commentDTO);
+    CommentMapper INSTANCE = Mappers.getMapper(CommentMapper.class);
+
+    CommentDTO toCommentDTO(Comment comment);
+    Comment toComment(CommentDTO commentDTO);
 }

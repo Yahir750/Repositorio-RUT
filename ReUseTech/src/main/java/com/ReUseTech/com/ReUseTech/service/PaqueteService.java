@@ -1,7 +1,8 @@
-package com.ReUseTech.service;
 
-import com.ReUseTech.model.Paquete;
-import com.ReUseTech.model.PaqueteRepository;
+package com.ReUseTech.com.ReUseTech.service;
+
+import com.ReUseTech.com.ReUseTech.model.Paquete;
+import com.ReUseTech.com.ReUseTech.repository.PaqueteRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

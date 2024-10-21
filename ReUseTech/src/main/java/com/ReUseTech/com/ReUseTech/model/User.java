@@ -1,6 +1,6 @@
 package com.ReUseTech.com.ReUseTech.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,4 +28,7 @@ public class User {
     // Puedes agregar relaciones adicionales si el usuario tiene, por ejemplo, una lista de órdenes
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
+
+    public String getConfirmationCode() { return null;
+    }
 }

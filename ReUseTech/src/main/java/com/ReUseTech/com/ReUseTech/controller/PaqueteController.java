@@ -1,7 +1,7 @@
-package com.ReUseTech.controller;
+package com.ReUseTech.com.ReUseTech.controller;
 
-import com.ReUseTech.model.Paquete;
-import com.ReUseTech.service.PaqueteService;
+import com.ReUseTech.com.ReUseTech.model.Paquete;
+import com.ReUseTech.com.ReUseTech.service.PaqueteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

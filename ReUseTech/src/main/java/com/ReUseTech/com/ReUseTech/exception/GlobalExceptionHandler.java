@@ -1,3 +1,4 @@
+
 package com.ReUseTech.com.ReUseTech.exception;
 
 import com.ReUseTech.com.ReUseTech.dto.ErrorDetails;

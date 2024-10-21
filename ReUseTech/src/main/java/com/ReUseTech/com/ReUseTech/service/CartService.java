@@ -1,70 +1,39 @@
+
 package com.ReUseTech.com.ReUseTech.service;
 
 
 import com.ReUseTech.com.ReUseTech.dto.CartDTO;
-import com.ReUseTech.com.ReUseTech.exception.InsufficientStockException;
-import com.ReUseTech.com.ReUseTech.exception.ResourceNotFoundException;
 import com.ReUseTech.com.ReUseTech.mapper.CartMapper;
 import com.ReUseTech.com.ReUseTech.model.Cart;
-import com.ReUseTech.com.ReUseTech.model.CartItem;
-import com.ReUseTech.com.ReUseTech.model.Product;
-import com.ReUseTech.com.ReUseTech.model.User;
 import com.ReUseTech.com.ReUseTech.repository.CartRepository;
-import com.ReUseTech.com.ReUseTech.repository.ProductRepository;
-import com.ReUseTech.com.ReUseTech.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
-@RequiredArgsConstructor
 public class CartService {
-    private final CartRepository cartRepository;
-    private final ProductRepository productRepository;
-    private final UserRepository userRepository;
-    private final CartMapper cartMapper;
 
-    public CartDTO addToCart(Long userId, Long productId, Integer quantity){
-        User user = userRepository.findById(userId)
-                .orElseThrow(()->new ResourceNotFoundException("User not found"));
-        Product product = productRepository.findById(productId)
-                .orElseThrow(()->new ResourceNotFoundException("Product not found"));
+    @Autowired
+    private CartRepository cartRepository;
 
-        if(product.getQuantity()<quantity){
-            throw new InsufficientStockException("Not enough available");
-        }
+    public CartDTO getCart(Long cartId) {
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
+        return CartMapper.INSTANCE.toCartDTO(cart);
+    }
 
-        Cart cart = cartRepository.findByUserId(userId)
-                .orElse(new Cart(null, user, new ArrayList<>()));
-        Optional<CartItem> existingCartItem = cart.getItems().stream()
-                .filter(item -> item.getProduct().getId().equals(productId))
-                .findFirst();
+    public CartDTO createCart(CartDTO cartDTO) {
+        Cart cart = CartMapper.INSTANCE.toCart(cartDTO);
+        cart = cartRepository.save(cart);
+        return CartMapper.INSTANCE.toCartDTO(cart);
+    }
 
-        if(existingCartItem.isPresent()){
-            CartItem cartItem = existingCartItem.get();
-            cartItem.setQuantity(cartItem.getQuantity()+quantity);
-        }else{
-            CartItem cartItem = new CartItem(null, cart, product, quantity);
-            cart.getItems().add(cartItem);
-        }
-        Cart savedCart = cartRepository.save(cart);
-        return cartMapper.toDTO(savedCart);
+    public CartDTO addToCart(Long userId, Long productId, Integer quantity) {
+        return null;
+    }
+
+    public void clearCart(Long userId) {
 
     }
 
-    public CartDTO getCart(Long userId){
-        Cart cart = cartRepository.findByUserId(userId)
-                .orElseThrow(()->new ResourceNotFoundException("Cart not found"));
-
-        return cartMapper.toDTO(cart);
-    }
-    public void clearCart(Long userId){
-        Cart cart = cartRepository.findByUserId(userId)
-                .orElseThrow(()->new ResourceNotFoundException("Cart not found"));
-
-        cart.getItems().clear();
-        cartRepository.save(cart);
-    }
+    // Otros métodos relacionados con el carrito
 }

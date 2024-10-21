@@ -2,55 +2,41 @@ package com.ReUseTech.com.ReUseTech.controller;
 
 
 import com.ReUseTech.com.ReUseTech.dto.OrderDTO;
-import com.ReUseTech.com.ReUseTech.model.Order;
-import com.ReUseTech.com.ReUseTech.model.User;
 import com.ReUseTech.com.ReUseTech.service.OrderService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/orders")
-@RequiredArgsConstructor
 public class OrderController {
-    private final OrderService orderService;
 
-    @PostMapping
-    @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<OrderDTO> createOrder(@AuthenticationPrincipal UserDetails userDetails,
-                                                @RequestParam String address,
-                                                @RequestParam String phoneNumber){
-        Long userId = ((User) userDetails).getId();
-        OrderDTO orderDTO = orderService.createOrder(userId, address, phoneNumber);
+    @Autowired
+    private OrderService orderService;
+
+    // Obtener un pedido por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderDTO> getOrder(@PathVariable Long id) {
+        OrderDTO orderDTO = orderService.getOrder(id);
         return ResponseEntity.ok(orderDTO);
     }
 
-    @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<OrderDTO>> getAllOrders(){
-        List<OrderDTO> orders = orderService.getAllOrders();
-        return ResponseEntity.ok(orders);
-    }
-    @GetMapping("/user")
-    @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<OrderDTO>> getUserOrders(@AuthenticationPrincipal UserDetails userDetails){
-        Long userId = ((User) userDetails).getId();
-        List<OrderDTO> orders = orderService.getUserOrders(userId);
+    // Obtener todos los pedidos de un usuario
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<OrderDTO>> getOrdersByUser(@PathVariable Long userId) {
+        List<OrderDTO> orders = orderService.getOrdersByUser(userId);
         return ResponseEntity.ok(orders);
     }
 
-    @PutMapping("/{orderId}/status")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<OrderDTO> updateOrderStatus(@PathVariable Long orderId,
-                                                      @RequestParam Order.OrderStatus status){
-        OrderDTO updatedOrder = orderService.updateOrderStatus(orderId, status);
-        return ResponseEntity.ok(updatedOrder);
+    // Crear un nuevo pedido
+    @PostMapping
+    public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO) {
+        OrderDTO createdOrder = orderService.createOrder(orderDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);
     }
 
-
+    // Otros métodos relacionados con los pedidos, como actualizar o eliminar
 }

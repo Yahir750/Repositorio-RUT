@@ -1,5 +1,7 @@
-package com.ReUseTech.model;
 
+package com.ReUseTech.com.ReUseTech.repository;
+
+import com.ReUseTech.com.ReUseTech.model.Paquete;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

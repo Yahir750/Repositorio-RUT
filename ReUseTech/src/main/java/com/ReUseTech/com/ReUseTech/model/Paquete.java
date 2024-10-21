@@ -1,6 +1,6 @@
-package com.ReUseTech.model;
+package com.ReUseTech.com.ReUseTech.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

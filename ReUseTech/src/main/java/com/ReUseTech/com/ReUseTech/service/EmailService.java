@@ -20,7 +20,6 @@ public class EmailService {
     public void sendOrderConfirmation(Order order){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromEmail);
-        message.setTo(order.getUser().getEmail());
         message.setSubject("Order confirmation");
         message.setText("Your order has been confirmed. Order ID " + order.getId());
         mailSender.send(message);

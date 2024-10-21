@@ -1,13 +1,14 @@
 package com.ReUseTech.com.ReUseTech.dto;
 
 
-import jakarta.validation.constraints.Positive;
+import javax.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
 public class CartItemDTO {
     private Long id;
     private Long productId;
-    @Positive
-    private Integer quantity;
+    private int quantity;
+
+    // Otros campos que consideres necesarios
 }

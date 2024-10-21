@@ -1,3 +1,4 @@
+
 package com.ReUseTech.com.ReUseTech.mapper;
 
 import com.ReUseTech.com.ReUseTech.dto.CartDTO;
@@ -6,17 +7,13 @@ import com.ReUseTech.com.ReUseTech.model.Cart;
 import com.ReUseTech.com.ReUseTech.model.CartItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface CartMapper {
-    @Mapping(target = "userId", source = "user.id")
-    CartDTO toDTO(Cart Cart);
-    @Mapping(target="user.id", source = "userId")
-    Cart toEntity(CartDTO cartDTO);
+    CartMapper INSTANCE = Mappers.getMapper(CartMapper.class);
 
-    @Mapping(target="productId", source="product.id")
-    CartItemDTO toDTO(CartItem cartItem);
+    CartDTO toCartDTO(Cart cart);
 
-    @Mapping(target="product.id", source="productId")
-    CartItem toEntity(CartItemDTO cartItemDTO);
+    Cart toCart(CartDTO cartDTO);
 }

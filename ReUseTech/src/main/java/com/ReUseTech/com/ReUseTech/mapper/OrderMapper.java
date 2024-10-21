@@ -2,33 +2,16 @@ package com.ReUseTech.com.ReUseTech.mapper;
 
 
 import com.ReUseTech.com.ReUseTech.dto.OrderDTO;
-import com.ReUseTech.com.ReUseTech.dto.OrderItemDTO;
 import com.ReUseTech.com.ReUseTech.model.Order;
-import com.ReUseTech.com.ReUseTech.model.OrderItem;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
-import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface OrderMapper {
-    @Mapping(target = "userId", source = "user.id")
-    @Mapping(target = "orderItems", source = "items")
-    OrderDTO toDTO(Order order);
+    OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
-    @Mapping(target = "user.id", source = "userId")
-    @Mapping(target = "items", source = "orderItems")
-    Order toEntity(OrderDTO orderDTO);
-
-    List<OrderDTO> toDTOs(List<Order> orders);
-    List<Order> toEntities(List<OrderDTO> orderDTOS);
-    @Mapping(target = "productId", source = "product.id")
-    OrderItemDTO toOrderItemDTO(OrderItem orderItem);
-    @Mapping(target = "product.id", source = "productId")
-    OrderItem toOrderItemEntity(OrderItemDTO orderItemDTO);
-
-    List<OrderItemDTO> toOrderItemDTOs(List<OrderItem> orderItem);
-    List<OrderItem> toOrderItemEntities(List<OrderItemDTO> orderItemDTO);
-
+    OrderDTO toOrderDTO(Order order);
+    Order toOrder(OrderDTO orderDTO);
 
 }

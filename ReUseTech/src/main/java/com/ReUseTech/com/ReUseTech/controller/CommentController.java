@@ -4,7 +4,7 @@ package com.ReUseTech.com.ReUseTech.controller;
 import com.ReUseTech.com.ReUseTech.dto.CommentDTO;
 import com.ReUseTech.com.ReUseTech.model.User;
 import com.ReUseTech.com.ReUseTech.service.CommentService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
