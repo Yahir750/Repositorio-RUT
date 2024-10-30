@@ -29,7 +29,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
+				<version>2021.0.5</version> <!-- Verifica que sea compatible con tu versión -->
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -142,8 +142,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.7.14</version>
+				<configuration>
+					<mainClass>com.ReUseTech.com.ReUseTech.ReUseTechApplication</mainClass> <!-- Especificamos clase principal -->
+				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>springboot--mysql-docker</finalName>
 	</build>
+
 </project>

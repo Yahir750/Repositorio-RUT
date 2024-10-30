@@ -2,7 +2,7 @@ package com.ReUseTech.com.ReUseTech.controller;
 
 
 import com.ReUseTech.com.ReUseTech.dto.OrderDTO;
-import com.ReUseTech.com.ReUseTech.service.OrderService;
+import com.ReUseTech.com.ReUseTech.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

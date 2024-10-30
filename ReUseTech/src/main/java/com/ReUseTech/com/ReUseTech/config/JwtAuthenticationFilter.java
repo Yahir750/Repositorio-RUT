@@ -1,7 +1,7 @@
 
 package com.ReUseTech.com.ReUseTech.config;
 
-import com.ReUseTech.com.ReUseTech.service.JwtService;
+import com.ReUseTech.com.ReUseTech.service.jwt.JwtService;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

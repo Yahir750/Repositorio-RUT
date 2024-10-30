@@ -1,4 +1,4 @@
-package com.ReUseTech.com.ReUseTech.service;
+package com.ReUseTech.com.ReUseTech.service.email;
 
 
 import com.ReUseTech.com.ReUseTech.model.Order;

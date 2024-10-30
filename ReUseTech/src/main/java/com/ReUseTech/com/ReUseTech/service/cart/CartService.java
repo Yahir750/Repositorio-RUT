@@ -1,5 +1,5 @@
 
-package com.ReUseTech.com.ReUseTech.service;
+package com.ReUseTech.com.ReUseTech.service.cart;
 
 
 import com.ReUseTech.com.ReUseTech.dto.CartDTO;

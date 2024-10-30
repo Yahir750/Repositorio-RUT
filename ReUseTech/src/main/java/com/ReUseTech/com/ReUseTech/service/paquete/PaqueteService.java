@@ -1,5 +1,5 @@
 
-package com.ReUseTech.com.ReUseTech.service;
+package com.ReUseTech.com.ReUseTech.service.paquete;
 
 import com.ReUseTech.com.ReUseTech.model.Paquete;
 import com.ReUseTech.com.ReUseTech.repository.PaqueteRepository;

@@ -3,7 +3,7 @@ package com.ReUseTech.com.ReUseTech.controller;
 
 import com.ReUseTech.com.ReUseTech.dto.CommentDTO;
 import com.ReUseTech.com.ReUseTech.model.User;
-import com.ReUseTech.com.ReUseTech.service.CommentService;
+import com.ReUseTech.com.ReUseTech.service.comment.CommentService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

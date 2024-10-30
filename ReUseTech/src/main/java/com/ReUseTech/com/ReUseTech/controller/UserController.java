@@ -1,7 +1,7 @@
 package com.ReUseTech.com.ReUseTech.controller;
 
 import com.ReUseTech.com.ReUseTech.model.User;
-import com.ReUseTech.com.ReUseTech.service.UserService;
+import com.ReUseTech.com.ReUseTech.service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

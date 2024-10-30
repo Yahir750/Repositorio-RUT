@@ -1,29 +1,29 @@
-
 package com.ReUseTech.com.ReUseTech.model;
 
-
 import javax.persistence.*;
-
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Setter
+@Getter
 @Entity
 @Data
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Long userId;
     private String status; // Por ejemplo: "PENDIENTE", "COMPLETADA", "CANCELADA"
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderItem> items;
 
-    public Object getUser() {
-        return null;
-    }
+    // Getters y setters
 
-    // Otros campos que consideres necesarios
 }

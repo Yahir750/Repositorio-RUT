@@ -1,4 +1,4 @@
-package com.ReUseTech.com.ReUseTech.service;
+package com.ReUseTech.com.ReUseTech.service.User;
 
 import com.ReUseTech.com.ReUseTech.model.User;
 import com.ReUseTech.com.ReUseTech.repository.UserRepository;
