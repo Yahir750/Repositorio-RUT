@@ -1,0 +1,199 @@
+version: '3.8'
+
+services:
+  # Servidor Eureka
+  eureka-server:
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_INSTANCE_HOSTNAME=eureka-server
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    networks:
+      - spring-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MySQL Database
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: microservices_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - spring-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Microservicio Cart
+  cartservice:
+    build:
+      context: ./cartservice
+      dockerfile: Dockerfile
+    container_name: cart-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/microservices_db
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_APPLICATION_NAME=cart-service
+      - SERVER_PORT=8081
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - spring-network
+    restart: unless-stopped
+
+  # Microservicio Comment
+  commentservice:
+    build:
+      context: ./commentservice
+      dockerfile: Dockerfile
+    container_name: comment-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/microservices_db
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_APPLICATION_NAME=comment-service
+      - SERVER_PORT=8082
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - spring-network
+    restart: unless-stopped
+
+  # Microservicio JWT
+  jwtservice:
+    build:
+      context: ./jwtservice
+      dockerfile: Dockerfile
+    container_name: jwt-service
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_APPLICATION_NAME=jwt-service
+      - SERVER_PORT=8083
+      - JWT_SECRET=tu_clave_secreta_muy_larga_y_segura
+      - JWT_EXPIRATION=86400000
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    networks:
+      - spring-network
+    restart: unless-stopped
+
+  # Microservicio Order
+  orderservice:
+    build:
+      context: ./orderservice
+      dockerfile: Dockerfile
+    container_name: order-service
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/microservices_db
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_APPLICATION_NAME=order-service
+      - SERVER_PORT=8084
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - spring-network
+    restart: unless-stopped
+
+  # Microservicio Product
+  productservice:
+    build:
+      context: ./productservice
+      dockerfile: Dockerfile
+    container_name: product-service
+    ports:
+      - "8085:8085"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/microservices_db
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_APPLICATION_NAME=product-service
+      - SERVER_PORT=8085
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - spring-network
+    restart: unless-stopped
+
+  # Microservicio User
+  userservice:
+    build:
+      context: ./userservice
+      dockerfile: Dockerfile
+    container_name: user-service
+    ports:
+      - "8086:8086"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/microservices_db
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_APPLICATION_NAME=user-service
+      - SERVER_PORT=8086
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - spring-network
+    restart: unless-stopped
+
+networks:
+  spring-network:
+    name: spring-network
+    driver: bridge
+
+volumes:
+  mysql-data:
+    name: mysql-data
