@@ -2,10 +2,12 @@ package com.ReUseTech.com.ReUseTech.mapper;
 
 
 import com.ReUseTech.com.ReUseTech.dto.OrderDTO;
+import com.ReUseTech.com.ReUseTech.dto.OrderItemDTO;
 import com.ReUseTech.com.ReUseTech.model.Order;
+import com.ReUseTech.com.ReUseTech.model.OrderItem;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-
 
 @Mapper
 public interface OrderMapper {
@@ -13,5 +15,4 @@ public interface OrderMapper {
 
     OrderDTO toOrderDTO(Order order);
     Order toOrder(OrderDTO orderDTO);
-
 }

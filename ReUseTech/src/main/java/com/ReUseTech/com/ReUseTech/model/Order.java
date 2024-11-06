@@ -2,29 +2,27 @@ package com.ReUseTech.com.ReUseTech.model;
 
 import javax.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Setter
-@Getter
+
 @Entity
 @Data
-@Table(name = "orders")
+@Table(name = "orders") // Usamos 'orders' porque 'order' es palabra reservada en SQL
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String status; // Por ejemplo: "PENDIENTE", "COMPLETADA", "CANCELADA"
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OrderItem> items;
+    private LocalDateTime orderDate;
+    private String status; // "PENDING", "COMPLETED", "CANCELLED"
+    private Double totalAmount;
+    private String shippingAddress;
 
-    // Getters y setters
-
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
 }

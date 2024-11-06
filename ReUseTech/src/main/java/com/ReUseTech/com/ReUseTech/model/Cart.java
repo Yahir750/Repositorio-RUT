@@ -2,12 +2,8 @@
 package com.ReUseTech.com.ReUseTech.model;
 
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -17,11 +13,15 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CartItem> items;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    // Otros campos que consideres necesarios
-
+    private Integer quantity;
+    private Double totalPrice;
+    private LocalDateTime createdAt;
 }

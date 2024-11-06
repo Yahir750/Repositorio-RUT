@@ -2,9 +2,7 @@ package com.ReUseTech.com.ReUseTech.model;
 
 
 import javax.persistence.*;
-
 import lombok.Data;
-
 
 @Entity
 @Data
@@ -17,6 +15,10 @@ public class OrderItem {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    private Long productId;
-    private int quantity;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    private Integer quantity;
+    private Double price;
 }

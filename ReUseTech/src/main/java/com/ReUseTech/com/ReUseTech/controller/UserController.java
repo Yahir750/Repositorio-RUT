@@ -1,32 +1,34 @@
 package com.ReUseTech.com.ReUseTech.controller;
 
+import com.ReUseTech.com.ReUseTech.dto.UserDTO;
 import com.ReUseTech.com.ReUseTech.model.User;
 import com.ReUseTech.com.ReUseTech.service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Users")
+@RequestMapping("/api/users")
+@CrossOrigin(origins = "*")
 public class UserController {
-
     @Autowired
     private UserService userService;
 
-    @GetMapping("/all")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUser(id));
     }
 
-    @PostMapping("/insert")
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    @PostMapping
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+        return ResponseEntity.ok(userService.createUser(userDTO));
     }
 }

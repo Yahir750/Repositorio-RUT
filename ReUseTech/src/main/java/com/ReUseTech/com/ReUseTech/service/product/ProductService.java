@@ -36,4 +36,8 @@ public class ProductService {
         product = productRepository.save(product);
         return ProductMapper.INSTANCE.toProductDTO(product);
     }
+
+
+    public void deleteProduct(Long id) {
+    }
 }

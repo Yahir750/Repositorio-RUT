@@ -6,11 +6,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(uses = {CommentMapper.class, OrderMapper.class})
+
+@Mapper
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     UserDTO toUserDTO(User user);
-
     User toUser(UserDTO userDTO);
 }

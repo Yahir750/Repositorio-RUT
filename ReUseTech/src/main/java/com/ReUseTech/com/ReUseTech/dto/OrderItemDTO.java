@@ -7,5 +7,6 @@ import lombok.Data;
 public class OrderItemDTO {
     private Long id;
     private Long productId;
-    private int quantity;
+    private Integer quantity;
+    private Double price;
 }
