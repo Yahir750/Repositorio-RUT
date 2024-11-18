@@ -9,18 +9,19 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ReUseTech</groupId>
-	<artifactId>ReUseTech</artifactId>
+	<artifactId>User_Service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<name>User_Service</name>
+	<description>MIcroservice for User</description>
+	<profiles>
+		<profile>
+			<id>skip-tests</id>
+			<properties>
+				<maven.test.skip>true</maven.test.skip>
+			</properties>
+		</profile>
+	</profiles>
 
-	<name>ReUseTech</name>
-	<description>MIcroservices</description>
-	<modules>
-		<module>Product_Service</module>
-		<module>User_Service</module>
-		<module>Cart_Service</module>
-
-	</modules>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
