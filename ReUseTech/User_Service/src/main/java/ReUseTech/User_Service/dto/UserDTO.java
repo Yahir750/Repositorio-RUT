@@ -1,5 +1,4 @@
-package ReUseTech.Product_Service.dto;
-
+package ReUseTech.User_Service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDTO {
+public class UserDTO {
     private Long id;
-    private String name;
-    private String description;
-    private double price;
+    private String username;
+    private String email;
 }

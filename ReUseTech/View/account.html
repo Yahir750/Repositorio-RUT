@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <title>FoodMart - Free eCommerce Grocery Store HTML Website Template</title>
+    <title>Account ReUseTech</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -170,7 +170,7 @@
           <div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
             <div class="support-box text-end d-none d-xl-block">
               <span class="fs-6 text-muted">Necesitas ayuda?</span>
-              <h5 class="mb-0">+55 3313868285</h5>
+              <h5 class="mb-0"></h5>
             </div>
 
             <ul class="d-flex justify-content-end list-unstyled m-0">
@@ -276,50 +276,207 @@
         </div>
       </div>
     </header>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Inicio de Sesión y Registro</title>
+      <style>
+        /* Estilos adicionales */
+        body.modal-active {
+            overflow: hidden;
+        }
 
-    <section class="py-5 mb-5" style="background: url(images/background-pattern.jpg);">
-      <div class="container-fluid">
-        <div class="d-flex justify-content-between">
-          <h1 class="page-title pb-2">Checkout</h1>
-          <nav class="breadcrumb fs-6">
-            <a class="breadcrumb-item nav-link" href="#">Inicio</a>
-            <a class="breadcrumb-item nav-link" href="#">Paginas</a>
-            <span class="breadcrumb-item active" aria-current="page">Checkout</span>
-          </nav>
-        </div>
-      </div>
-    </section>
+        .blur {
+            filter: blur(5px);
+            transition: filter 0.3s;
+        }
 
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .admin-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .admin-btn img {
+            margin-right: 8px;
+        }
+      </style>
+    </head>
+    <body>
     <section id="login-form" class="py-5">
       <div class="container-sm">
         <div class="row justify-content-center">
           <div class="col-lg-4 p-5 border shadow-sm">
             <h5 class="text-uppercase mb-4">INICIO DE SESIÓN</h5>
-            <form id="form" class="form-group flex-wrap">
+            <form id="form" class="form-group flex-wrap" onsubmit="validateLogin(event)">
               <div class="col-12 pb-3">
                 <label class="d-none">Nombre de usuario o email *</label>
-                <input type="text" name="name" placeholder="Usuario o Email"
-                  class="form-control">
+                <input type="text" id="username" name="username" placeholder="Usuario o Email" class="form-control" required>
               </div>
               <div class="col-12 pb-3">
                 <label class="d-none">Contraseña *</label>
-                <input type="text" name="email" placeholder="Contraseña" class="form-control">
+                <input type="password" id="password" name="password" placeholder="Contraseña" class="form-control" required>
               </div>
               <div class="col-12 pb-3">
                 <label>
-                  <input type="checkbox" required="">
+                  <input type="checkbox" required>
                   <span class="label-body">Recordarme</span>
                 </label>
               </div>
               <div class="col-12">
-                <button type="submit" name="submit" class="btn btn-primary text-uppercase w-100">Iniciar sesión</button>
-                <p><a href="#">Olvidaste tu contraseña?</a></p>
+                <button type="submit" class="btn btn-primary text-uppercase w-100">Iniciar sesión</button>
+                <p><a href="#">¿Olvidaste tu contraseña?</a></p>
               </div>
             </form>
+            <div class="col-12 mt-3">
+              <button class="btn btn-success text-uppercase w-100" onclick="showRegisterModal()">Registrarse</button>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Botón de Administrador -->
+    <a href="admin.html" class="admin-btn">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/admin-settings-male.png" alt="Admin Icon" width="20" height="20">
+      Admin
+    </a>
+
+    <!-- Modal de Validación -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <p>Validando datos...</p>
+      </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div id="registerModal" class="modal">
+      <div class="modal-content">
+        <h5 class="text-uppercase mb-4">Registro de Usuario</h5>
+        <form id="registerForm" onsubmit="registerUser(event)">
+          <div class="form-group">
+            <label for="regUsername">Nombre de usuario *</label>
+            <input type="text" id="regUsername" name="regUsername" placeholder="Nombre de usuario" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="regEmail">Email *</label>
+            <input type="email" id="regEmail" name="regEmail" placeholder="Email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="regPassword">Contraseña *</label>
+            <input type="password" id="regPassword" name="regPassword" placeholder="Contraseña" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary text-uppercase w-100">Registrar</button>
+          </div>
+        </form>
+        <button class="btn btn-danger text-uppercase w-100 mt-3" onclick="hideRegisterModal()">Cancelar</button>
+      </div>
+    </div>
+
+    <script>
+      function validateLogin(event) {
+          event.preventDefault();
+
+          // Mostrar el modal de validación
+          document.getElementById('myModal').style.display = 'block';
+          document.querySelector('.container-sm').classList.add('blur');
+
+          // Simulación de validación con un retraso
+          setTimeout(function() {
+              // Ocultar el modal
+              document.getElementById('myModal').style.display = 'none';
+              document.querySelector('.container-sm').classList.remove('blur');
+              // Redirigir a user.html
+              window.location.href = 'user.html';
+          }, 2000); // Simula 2 segundos de validación
+      }
+
+      function showRegisterModal() {
+          document.getElementById('registerModal').style.display = 'block';
+          document.body.classList.add('modal-active');
+          document.querySelector('.container-sm').classList.add('blur');
+      }
+
+      function hideRegisterModal() {
+          document.getElementById('registerModal').style.display = 'none';
+          document.body.classList.remove('modal-active');
+          document.querySelector('.container-sm').classList.remove('blur');
+      }
+
+      async function registerUser(event) {
+          event.preventDefault();
+
+          const username = document.getElementById('regUsername').value;
+          const email = document.getElementById('regEmail').value;
+          const password = document.getElementById('regPassword').value;
+
+          try {
+              const response = await fetch('http://localhost:8082/users', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ username, email, password })
+              });
+
+              if (!response.ok) {
+                  throw new Error('Error en el registro');
+              }
+
+              const result = await response.json();
+              alert('Registro exitoso');
+              hideRegisterModal();
+
+          } catch (error) {
+              alert('Error: ' + error.message);
+          }
+      }
+    </script>
+    </body>
+    </html>
+
+
+
 
     <footer class="py-5">
       <div class="container-fluid">
@@ -365,99 +522,92 @@
               <h5 class="widget-title">Ultras</h5>
               <ul class="menu-list list-unstyled">
                 <li class="menu-item">
-                  <a href="#" class="nav-link">About us</a>
+                  <a href="#" class="nav-link">Sobre Nosotros</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Conditions </a>
+                  <a href="#" class="nav-link">Condiciones</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Our Journals</a>
+                  <a href="#" class="nav-link">Nuestros Diarios</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Careers</a>
+                  <a href="#" class="nav-link">Carreras</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Affiliate Programme</a>
+                  <a href="#" class="nav-link">Programa de Afiliados</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Ultras Press</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-2 col-sm-6">
-            <div class="footer-menu">
-              <h5 class="widget-title">Customer Service</h5>
-              <ul class="menu-list list-unstyled">
-                <li class="menu-item">
-                  <a href="#" class="nav-link">FAQ</a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="nav-link">Contact</a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="nav-link">Privacy Policy</a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="nav-link">Returns & Refunds</a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="nav-link">Cookie Guidelines</a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="nav-link">Delivery Information</a>
+                  <a href="#" class="nav-link">Ultras Prensa</a>
                 </li>
               </ul>
             </div>
           </div>
           <div class="col-md-2 col-sm-6">
             <div class="footer-menu">
-              <h5 class="widget-title">Customer Service</h5>
+              <h5 class="widget-title">Servicio al Cliente</h5>
               <ul class="menu-list list-unstyled">
                 <li class="menu-item">
-                  <a href="#" class="nav-link">FAQ</a>
+                  <a href="#" class="nav-link">Preguntas Frecuentes</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Contact</a>
+                  <a href="#" class="nav-link">Contacto</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Privacy Policy</a>
+                  <a href="#" class="nav-link">Política de Privacidad</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Returns & Refunds</a>
+                  <a href="#" class="nav-link">Devoluciones y Reembolsos</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Cookie Guidelines</a>
+                  <a href="#" class="nav-link">Política de Cookies</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Delivery Information</a>
+                  <a href="#" class="nav-link">Información de Envío</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6">
+            <div class="footer-menu">
+              <h5 class="widget-title">Servicio al Cliente</h5>
+              <ul class="menu-list list-unstyled">
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Preguntas Frecuentes</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Contacto</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Política de Privacidad</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Devoluciones y Reembolsos</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Política de Cookies</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Información de Envío</a>
                 </li>
               </ul>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="footer-menu">
-              <h5 class="widget-title">Subscribe Us</h5>
-              <p>Subscribe to our newsletter to get updates about our grand offers.</p>
+              <h5 class="widget-title">Suscríbete</h5>
+              <p>Suscríbete a nuestro boletín para recibir actualizaciones sobre nuestras grandes ofertas.</p>
               <form class="d-flex mt-3 gap-0" action="index.html">
-                <input class="form-control rounded-start rounded-0 bg-light" type="email" placeholder="Email Address" aria-label="Email Address">
-                <button class="btn btn-dark rounded-end rounded-0" type="submit">Subscribe</button>
+                <input class="form-control rounded-start rounded-0 bg-light" type="email" placeholder="Dirección de Email" aria-label="Dirección de Email">
+                <button class="btn btn-dark rounded-end rounded-0" type="submit">Suscribirse</button>
               </form>
             </div>
           </div>
-
         </div>
       </div>
     </footer>
     <div id="footer-bottom">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-6 copyright">
-            <p>© 2023 Foodmart. All rights reserved.</p>
-          </div>
-          <div class="col-md-6 credit-link text-start text-md-end">
-            <p>Free HTML Template by <a href="https://templatesjungle.com/">TemplatesJungle</a></p>
-          </div>
         </div>
       </div>
     </div>

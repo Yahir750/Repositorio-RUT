@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Tester Rápido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .endpoint-group {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .endpoint-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .get { background: #61affe; color: white; }
+        .post { background: #49cc90; color: white; }
+        .put { background: #fca130; color: white; }
+        .delete { background: #f93e3e; color: white; }
+        .response {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div class="endpoint-group">
+    <div class="endpoint-title">Products (8081)</div>
+    <div class="button-group">
+        <button class="get" onclick="fetchData('http://localhost:8081/products', 'GET')">GET Products</button>
+        <button class="post" onclick="showAddProduct()">POST Product</button>
+    </div>
+    <div id="productResponse" class="response"></div>
+</div>
+
+<div class="endpoint-group">
+    <div class="endpoint-title">Users (8082)</div>
+    <div class="button-group">
+        <button class="get" onclick="fetchData('http://localhost:8082/users', 'GET')">GET Users</button>
+        <button class="get" onclick="window.open('http://localhost:8082/users', '_blank')">Abrir en nueva pestaña</button>
+    </div>
+    <div id="userResponse" class="response"></div>
+</div>
+
+<div class="endpoint-group">
+    <div class="endpoint-title">Carts (8083)</div>
+    <div class="button-group">
+        <button class="get" onclick="fetchData('http://localhost:8083/carts', 'GET')">GET Carts</button>
+        <button class="get" onclick="window.open('http://localhost:8083/carts', '_blank')">Abrir en nueva pestaña</button>
+    </div>
+    <div id="cartResponse" class="response"></div>
+</div>
+
+<script>
+    async function fetchData(url, method, body = null) {
+        try {
+            const responseDiv = document.getElementById(url.split('/')[3] + 'Response');
+            responseDiv.innerHTML = 'Cargando...';
+
+            const options = {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            if (body) {
+                options.body = JSON.stringify(body);
+            }
+
+            const response = await fetch(url, options);
+            const data = await response.json();
+            responseDiv.innerHTML = JSON.stringify(data, null, 2);
+        } catch (error) {
+            // Si falla el fetch, abrimos en nueva pestaña
+            window.open(url, '_blank');
+        }
+    }
+
+    function showAddProduct() {
+        const product = {
+            name: prompt('Nombre del producto:'),
+            description: prompt('Descripción:'),
+            price: parseFloat(prompt('Precio:'))
+        };
+
+        if (product.name && product.description && product.price) {
+            fetchData('http://localhost:8081/products', 'POST', product);
+        }
+    }
+</script>
+</body>
+</html>

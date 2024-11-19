@@ -1,5 +1,6 @@
 package ReUseTech.User_Service.controller;
 
+import ReUseTech.User_Service.UserLoginRequest;
 import ReUseTech.User_Service.entity.User;
 import ReUseTech.User_Service.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -51,5 +52,14 @@ public class UserController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UserLoginRequest user) {
+        boolean isAuthenticated = userService.authenticate(user.getUsername(), user.getPassword());
+        if (isAuthenticated) {
+            return ResponseEntity.ok("Login successful");
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
     }
 }
