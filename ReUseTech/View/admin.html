@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administrador</title>
     <style>
         body {
@@ -14,17 +12,31 @@
 
         .container {
             width: 95%;
-            max-width: 1200px;
+            max-width: 1900px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        header {
-            background: #2c3e50;
-            color: white;
+        .header {
+            background: #ffc668;
+            color: black;
             padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 2rem;
+        }
+
+        .main-logo img {
+            max-height: 3000px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            flex-grow: 1;
             text-align: center;
+            padding-left: 1rem;
         }
 
         .crud-container {
@@ -119,16 +131,21 @@
     </style>
 </head>
 <body>
-<header>
-    <h1>Panel de Administrador</h1>
+<header class="header">
+    <div class="main-logo">
+        <a href="index.html">
+            <img src="images/logo.png" alt="logo" class="img-fluid">
+        </a>
+    </div>
+    <h1>PANEL DE ADMINISTRADOR</h1>
 </header>
 
 <div class="container">
-    <div class="crud-container">
-        <div class="action-buttons">
-            <button class="btn btn-primary" onclick="openModal('add')">Agregar Usuario</button>
-        </div>
+    <div class="action-buttons">
+        <button class="btn btn-primary" onclick="openModal('add')">Agregar Usuario</button>
+    </div>
 
+    <div class="crud-container">
         <table id="usersTable">
             <thead>
             <tr>
@@ -237,16 +254,15 @@
         };
 
         try {
-            let response;
             if (userId) {
-                response = await fetchWithError(`${API_URL}/${userId}`, {
+                await fetchWithError(`${API_URL}/${userId}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userData)
                 });
                 alert('Usuario actualizado exitosamente');
             } else {
-                response = await fetchWithError(API_URL, {
+                await fetchWithError(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userData)
