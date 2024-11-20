@@ -9,7 +9,13 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            font-size: 16px;
         }
 
         .container {
@@ -21,11 +27,13 @@
         }
 
         header {
-            background: linear-gradient(90deg, #2c3e50, #4b79a1);
+            background: linear-gradient(15deg, #aed6f1, #3498db);
             color: white;
-            padding: 1rem;
+            padding: 2rem 3rem;
             margin-bottom: 2rem;
             position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
 
         .welcome-section {
@@ -34,31 +42,47 @@
             align-items: center;
         }
 
+        .welcome-section h1 {
+            font-size: 3rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
         .crud-container {
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            padding: 30px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .crud-container:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
         }
 
         .btn {
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            margin-right: 10px;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 16px;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .btn-primary {
             background: #3498db;
             color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .btn-primary:hover {
@@ -69,6 +93,7 @@
         .btn-success {
             background: #2ecc71;
             color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .btn-success:hover {
@@ -79,6 +104,7 @@
         .btn-danger {
             background: #e74c3c;
             color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .btn-danger:hover {
@@ -91,16 +117,32 @@
             border-collapse: collapse;
             margin-top: 20px;
             animation: fadeInTable 0.5s ease-in-out;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
 
         th, td {
-            padding: 12px;
+            padding: 16px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            font-size: 16px;
         }
 
         th {
-            background: #f8f9fa;
+            background: #f1f1f1;
+            color: #2c3e50;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            background: #fff;
+        }
+
+        tr:hover td {
+            background-color: #f9f9f9;
         }
 
         .modal {
@@ -117,28 +159,32 @@
         .modal-content {
             background: white;
             width: 90%;
-            max-width: 500px;
+            max-width: 600px;
             margin: 50px auto;
-            padding: 20px;
-            border-radius: 8px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.2);
             animation: modalFadeIn 0.3s ease-in-out;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 18px;
+            color: #2c3e50;
         }
 
         .form-group input, .form-group textarea {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
             transition: border-color 0.3s ease;
+            font-size: 16px;
         }
 
         .form-group input:focus, .form-group textarea:focus {
@@ -148,7 +194,9 @@
         .close {
             float: right;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
         }
 
         .btn-logout {
@@ -157,16 +205,19 @@
             right: 10px;
             background: #e74c3c;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 30px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
-            transition: background-color 0.3s ease;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .btn-logout:hover {
             background: #c0392b;
+            transform: translateY(-2px);
         }
 
         .fade-in {
@@ -226,225 +277,224 @@
             }
         }
     </style>
+</head>
+<body>
 
+<header>
+    <div class="container welcome-section">
+        <h1>Panel de Vendedor</h1>
+    </div>
+</header>
 
+<div class="container">
+    <div class="crud-container">
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="ProductUI.openModal('add')">Agregar Producto</button>
+        </div>
 
-    <script>
-            const API_CONFIG = {
-                BASE_URL: 'http://localhost:8081/products',
-                HEADERS: {
-                    'Content-Type': 'application/json',
+        <table id="productsTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="ProductUI.closeModal()">&times;</span>
+        <h2 id="modalTitle">Agregar Producto</h2>
+        <form id="productForm">
+            <input type="hidden" id="productId">
+            <div class="form-group">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Descripción:</label>
+                <textarea id="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Precio:</label>
+                <input type="number" id="price" step="0.01" required>
+            </div>
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const API_CONFIG = {
+        BASE_URL: 'http://localhost:8081/products',
+        HEADERS: {
+            'Content-Type': 'application/json',
+        }
+    };
+
+    class ProductAPI {
+        static async fetchWithError(url, options = {}) {
+            const response = await fetch(url, {
+                ...options,
+                headers: API_CONFIG.HEADERS,
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+            }
+
+            if (response.status !== 204) {
+                return response.json();
+            }
+
+            return null;
+        }
+
+        static async getAll() {
+            return this.fetchWithError(API_CONFIG.BASE_URL);
+        }
+
+        static async getById(id) {
+            return this.fetchWithError(`${API_CONFIG.BASE_URL}/${id}`);
+        }
+
+        static async create(product) {
+            return this.fetchWithError(API_CONFIG.BASE_URL, {
+                method: 'POST',
+                body: JSON.stringify(product)
+            });
+        }
+
+        static async update(id, product) {
+            return this.fetchWithError(`${API_CONFIG.BASE_URL}/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(product)
+            });
+        }
+
+        static async delete(id) {
+            return this.fetchWithError(`${API_CONFIG.BASE_URL}/${id}`, {
+                method: 'DELETE'
+            });
+        }
+    }
+
+    class ProductUI {
+        static async loadProducts() {
+            try {
+                const products = await ProductAPI.getAll();
+                const tbody = document.querySelector('#productsTable tbody');
+                tbody.innerHTML = products.map(product => `
+                    <tr>
+                        <td>${product.id}</td>
+                        <td>${product.name}</td>
+                        <td>${product.description}</td>
+                        <td>$${product.price.toFixed(2)}</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="ProductUI.openModal('edit', ${product.id})">Editar</button>
+                            <button class="btn btn-danger" onclick="ProductUI.deleteProduct(${product.id})">Eliminar</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                this.showError('Error al cargar los productos', error);
+            }
+        }
+
+        static async openModal(action, productId = null) {
+            const modal = document.getElementById('productModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const form = document.getElementById('productForm');
+            form.reset();
+
+            try {
+                if (action === 'edit' && productId) {
+                    modalTitle.textContent = 'Editar Producto';
+                    const product = await ProductAPI.getById(productId);
+                    if (product) {
+                        document.getElementById('productId').value = product.id;
+                        document.getElementById('name').value = product.name;
+                        document.getElementById('description').value = product.description;
+                        document.getElementById('price').value = product.price;
+                    }
+                } else {
+                    modalTitle.textContent = 'Agregar Producto';
+                    document.getElementById('productId').value = '';
                 }
+                modal.style.display = 'block';
+            } catch (error) {
+                this.showError('Error al abrir el modal', error);
+            }
+        }
+
+        static closeModal() {
+            document.getElementById('productModal').style.display = 'none';
+        }
+
+        static async handleSubmit(event) {
+            event.preventDefault();
+            const productId = document.getElementById('productId').value;
+
+            const productData = {
+                name: document.getElementById('name').value,
+                description: document.getElementById('description').value,
+                price: parseFloat(document.getElementById('price').value)
             };
 
-            class ProductAPI {
-                static async fetchWithError(url, options = {}) {
-                    const response = await fetch(url, {
-                        ...options,
-                        headers: API_CONFIG.HEADERS,
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
-                    }
-
-                    if (response.status !== 204) {
-                        return response.json();
-                    }
-
-                    return null;
+            try {
+                if (productId) {
+                    await ProductAPI.update(productId, { ...productData, id: parseInt(productId) });
+                    this.showSuccess('Producto actualizado exitosamente');
+                } else {
+                    await ProductAPI.create(productData);
+                    this.showSuccess('Producto agregado exitosamente');
                 }
+                await this.loadProducts();
+                this.closeModal();
+            } catch (error) {
+                this.showError('Error al guardar el producto', error);
+            }
+        }
 
-                static async getAll() {
-                    return this.fetchWithError(API_CONFIG.BASE_URL);
-                }
-
-                static async getById(id) {
-                    return this.fetchWithError(`${API_CONFIG.BASE_URL}/${id}`);
-                }
-
-                static async create(product) {
-                    return this.fetchWithError(API_CONFIG.BASE_URL, {
-                        method: 'POST',
-                        body: JSON.stringify(product)
-                    });
-                }
-
-                static async update(id, product) {
-                    return this.fetchWithError(`${API_CONFIG.BASE_URL}/${id}`, {
-                        method: 'PUT',
-                        body: JSON.stringify(product)
-                    });
-                }
-
-                static async delete(id) {
-                    return this.fetchWithError(`${API_CONFIG.BASE_URL}/${id}`, {
-                        method: 'DELETE'
-                    });
+        static async deleteProduct(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+                try {
+                    await ProductAPI.delete(id);
+                    this.showSuccess('Producto eliminado exitosamente');
+                    await this.loadProducts();
+                } catch (error) {
+                    this.showError('Error al eliminar el producto', error);
                 }
             }
+        }
 
-            class ProductUI {
-                static async loadProducts() {
-                    try {
-                        const products = await ProductAPI.getAll();
-                        const tbody = document.querySelector('#productsTable tbody');
-                        tbody.innerHTML = products.map(product => `
-                            <tr>
-                                <td>${product.id}</td>
-                                <td>${product.name}</td>
-                                <td>${product.description}</td>
-                                <td>$${product.price.toFixed(2)}</td>
-                                <td>
-                                    <button class="btn btn-primary" onclick="ProductUI.openModal('edit', ${product.id})">Editar</button>
-                                    <button class="btn btn-danger" onclick="ProductUI.deleteProduct(${product.id})">Eliminar</button>
-                                </td>
-                            </tr>
-                        `).join('');
-                    } catch (error) {
-                        this.showError('Error al cargar los productos', error);
-                    }
-                }
+        static showError(message, error) {
+            console.error('Error:', error);
+            alert(`${message}: ${error.message}`);
+        }
 
-                static async openModal(action, productId = null) {
-                    const modal = document.getElementById('productModal');
-                    const modalTitle = document.getElementById('modalTitle');
-                    const form = document.getElementById('productForm');
-                    form.reset();
+        static showSuccess(message) {
+            alert(message);
+        }
 
-                    try {
-                        if (action === 'edit' && productId) {
-                            modalTitle.textContent = 'Editar Producto';
-                            const product = await ProductAPI.getById(productId);
-                            if (product) {
-                                document.getElementById('productId').value = product.id;
-                                document.getElementById('name').value = product.name;
-                                document.getElementById('description').value = product.description;
-                                document.getElementById('price').value = product.price;
-                            }
-                        } else {
-                            modalTitle.textContent = 'Agregar Producto';
-                            document.getElementById('productId').value = '';
-                        }
-                        modal.style.display = 'block';
-                    } catch (error) {
-                        this.showError('Error al abrir el modal', error);
-                    }
-                }
+        static init() {
+            document.getElementById('productForm').addEventListener('submit', (e) => this.handleSubmit(e));
+            window.onclick = (event) => {
+                const modal = document.getElementById('productModal');
+                if (event.target === modal) this.closeModal();
+            };
+            this.loadProducts();
+        }
+    }
 
-                static closeModal() {
-                    document.getElementById('productModal').style.display = 'none';
-                }
-
-                static async handleSubmit(event) {
-                    event.preventDefault();
-                    const productId = document.getElementById('productId').value;
-
-                    const productData = {
-                        name: document.getElementById('name').value,
-                        description: document.getElementById('description').value,
-                        price: parseFloat(document.getElementById('price').value)
-                    };
-
-                    try {
-                        if (productId) {
-                            await ProductAPI.update(productId, { ...productData, id: parseInt(productId) });
-                            this.showSuccess('Producto actualizado exitosamente');
-                        } else {
-                            await ProductAPI.create(productData);
-                            this.showSuccess('Producto agregado exitosamente');
-                        }
-                        await this.loadProducts();
-                        this.closeModal();
-                    } catch (error) {
-                        this.showError('Error al guardar el producto', error);
-                    }
-                }
-
-                static async deleteProduct(id) {
-                    if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-                        try {
-                            await ProductAPI.delete(id);
-                            this.showSuccess('Producto eliminado exitosamente');
-                            await this.loadProducts();
-                        } catch (error) {
-                            this.showError('Error al eliminar el producto', error);
-                        }
-                    }
-                }
-
-                static showError(message, error) {
-                    console.error('Error:', error);
-                    alert(`${message}: ${error.message}`);
-                }
-
-                static showSuccess(message) {
-                    alert(message);
-                }
-
-                static init() {
-                    document.getElementById('productForm').addEventListener('submit', (e) => this.handleSubmit(e));
-                    window.onclick = (event) => {
-                        const modal = document.getElementById('productModal');
-                        if (event.target === modal) this.closeModal();
-                    };
-                    this.loadProducts();
-                }
-            }
-
-            document.addEventListener('DOMContentLoaded', () => ProductUI.init());
-        </script>
-    </head>
-    <body>
-    <header>
-        <div class="container welcome-section">
-            <h1>Panel de Vendedor</h1>
-        </div>
-    </header>
-
-    <div class="container">
-        <div class="crud-container">
-            <div class="action-buttons">
-                <button class="btn btn-primary" onclick="ProductUI.openModal('add')">Agregar Producto</button>
-            </div>
-
-            <table id="productsTable">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Precio</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div id="productModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="ProductUI.closeModal()">&times;</span>
-            <h2 id="modalTitle">Agregar Producto</h2>
-            <form id="productForm">
-                <input type="hidden" id="productId">
-                <div class="form-group">
-                    <label for="name">Nombre:</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Descripción:</label>
-                    <textarea id="description" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="price">Precio:</label>
-                    <input type="number" id="price" step="0.01" required>
-                </div>
-                <button type="submit" class="btn btn-success">Guardar</button>
-            </form>
-        </div>
-    </div>
-    </body>
-    </html>
+    document.addEventListener('DOMContentLoaded', () => ProductUI.init());
+</script>
+</body>
+</html>
