@@ -2,7 +2,15 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+
     <title>Panel de Vendedor - Gestión de Productos</title>
     <style>
         * {
@@ -21,12 +29,30 @@
         }
 
         header {
-            background: linear-gradient(90deg, #2c3e50, #4b79a1);
+            background: linear-gradient(90deg, #ffc668, #4b79a1);
             color: white;
             padding: 1rem;
             margin-bottom: 2rem;
             position: relative;
         }
+
+        .header-content {
+    display: flex;           /* Activa flexbox para alineación horizontal */
+    align-items: center;     /* Centra el texto verticalmente con el logo */
+    gap: 10px;               /* Espaciado entre el logo y el texto */
+}
+
+.header-content img {
+    height: 80px;            /* Ajusta la altura del logo según tu diseño */
+    width: auto;             /* Mantén la proporción del logo */
+}
+
+.header-content h1 {
+    font-size: 1.5rem;       /* Ajusta el tamaño del texto según tu diseño */
+    color: white;            /* Asegúrate de que el color sea visible */
+    margin: 0;               /* Elimina márgenes adicionales */
+}
+
 
         .welcome-section {
             display: flex;
@@ -394,13 +420,20 @@
 
             document.addEventListener('DOMContentLoaded', () => ProductUI.init());
         </script>
+
     </head>
     <body>
     <header>
         <div class="container welcome-section">
-            <h1>Panel de Vendedor</h1>
+            <div class="header-content">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="logo" class="img-fluid">
+                </a>
+                <h1>Panel de Vendedor</h1>
+            </div>
         </div>
     </header>
+
 
     <div class="container">
         <div class="crud-container">
